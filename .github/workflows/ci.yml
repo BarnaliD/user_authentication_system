@@ -2,55 +2,26 @@ name: Node.js CI
 
 on:
   push:
-    branches:
-      - master
-      - develop
+    branches: [master]
   pull_request:
-    branches:
-      - master
-      - develop
+    branches: [master]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: [18.x]
+
     steps:
-    # Step 1: Checkout the repository code
-    - name: Checkout code
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v3
 
-    # Step 2: Cache Node.js modules (to speed up build)
-    - name: Cache Node.js modules
-      uses: actions/cache@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
       with:
-        path: node_modules
-        key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-modules-
+        node-version: ${{ matrix.node-version }}
 
-    # Step 3: Set up Node.js environment
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '16'  # or the version you're using, change it if needed
-
-    # Step 4: Install dependencies
-    - name: Install dependencies
-      run: npm install
-
-    # Step 5: Run linting (ESLint)
-    - name: Run ESLint
-      run: npm run lint
-
-    # Step 6: Run tests (Jest)
-    - name: Run tests
-      run: npm run test
-
-    # Step 7: Run tests with coverage
-    - name: Run tests with coverage
-      run: npm run test:coverage
-
-    # Step 8: Run tests in watch mode (optional, useful for continuous testing)
-    - name: Run tests in watch mode
-      if: github.event_name == 'push'  # Only run this step on push events
-      run: npm run test:watch
+    - run: npm install
+    - run: npm run lint
+    - run: npm run test:coverage
