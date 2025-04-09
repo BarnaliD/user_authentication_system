@@ -30,7 +30,7 @@ jobs:
 
     # Step 3: Set up Node.js environment
     - name: Set up Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v2
       with:
         node-version: '16'  # or the version you're using, change it if needed
 
