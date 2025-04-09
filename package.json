@@ -1,0 +1,28 @@
+{
+  "name": "user_authentication_system",
+  "version": "1.0.0",
+  "description": "A secure user authentication system with Jest testing and ESLint integration",
+  "main": "src/main.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint src/ tests/",
+    "lint:fix": "eslint . --fix"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "eslint-plugin-jest": "^28.11.0",
+    "globals": "^13.19.0", 
+    "jest": "^29.7.0"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1"
+  }
+}
+
