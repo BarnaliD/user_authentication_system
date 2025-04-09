@@ -4,6 +4,8 @@ const User = require('../src/user');
 const userFilePath = path.join(__dirname, '../data/users.json');
 
 beforeEach(async () => {
+   //To make sure the userfile exists
+  await User.ensureUserFileExists();
   // Reset users.json to a clean slate before each test
   await fs.writeFile(userFilePath, '[]');
 });

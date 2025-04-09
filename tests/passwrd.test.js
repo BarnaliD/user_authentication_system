@@ -6,6 +6,7 @@ const changePassword = require('../src/password');
 const userFilePath = path.join(__dirname, '../data/users.json');
 
 beforeEach(async () => {
+  await User.ensureUserFileExists();
   await fs.writeFile(userFilePath, '[]');
 });
 
